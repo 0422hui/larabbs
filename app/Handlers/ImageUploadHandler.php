@@ -6,13 +6,13 @@ class ImageUploadHandler
 
     public function save($file,$folder,$file_prefix)
     {   //构建存储的文件夹规则，值如：uploads/images/avatars/201709/21/
-        $folder_name="uploade/images/$folder/".date('Ym/d',time());
+        $folder_name="uploads/images/$folder/".date('Ym/d',time());
 
         $upload_path=public_path().'/'.$folder_name;
 
-        $extension=strtolower($file->getClientOriginalExtension())?:png;
+        $extension=strtolower($file->getClientOriginalExtension())?:'png';
 
-        $filename=$file_prefix.'_'.time().'_'.str_random(10);
+        $filename=$file_prefix.'_'.time().'_'.str_random(10).'.'.$extension;
         // 如果上传的不是图片将终止操作
         if(!in_array($extension,$this->allowed_ext)){
             return;
