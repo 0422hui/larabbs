@@ -48,10 +48,14 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
-        return Validator::make($data, [
+        return Validator::make($data, [//表单验证规则
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:6', 'confirmed'],
+            'captcha'=>['required','captcha']
+        ],[
+            'captcha.required'=>'请输入验证码，不能为空哦',//验证码验证规则
+            'captcha.captcha'=>'请输入正确验证码哦，再看看',
         ]);
     }
 
