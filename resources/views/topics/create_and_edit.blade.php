@@ -42,8 +42,8 @@
                 </select>
               </div>
 
-              <div class="form-group">
-                <textarea name="body" class="form-control" id="editor" rows="6" placeholder="请填入至少三个字符的内容。" required>{{ old('body', $topic->body ) }}</textarea>
+              <div class="form-group" >
+                <textarea style="overflow:auto" name="body" class="form-control" id="editor" rows="6" placeholder="请填入至少三个字符的内容。" required>{{ old('body', $topic->body ) }}</textarea>
               </div>
 
               <div class="well well-sm">
@@ -71,6 +71,16 @@
     $(document).ready(function() {
       var editor = new Simditor({
         textarea: $('#editor'),
+        upload: {
+          url: '{{ route('topics.upload_image') }}',
+          params: {
+            _token: '{{ csrf_token() }}'
+          },
+          fileKey: 'upload_file',
+          connectionCount: 9,
+          leaveConfirm: '文件上传中，关闭此页面将取消上传。'
+        },
+        pasteImage: true,
       });
     });
   </script>
