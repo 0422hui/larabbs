@@ -22,7 +22,7 @@ class TopicRequest extends Request
                 return [
                     'title'=>'required|min:2',
                     'body'=>'required|min:3',
-                    'category'=>'required|numeric',
+                    'category'=>'numeric',
                 ];
             }
             case 'GET':
