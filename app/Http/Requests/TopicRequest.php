@@ -20,7 +20,9 @@ class TopicRequest extends Request
             case 'PATCH':
             {
                 return [
-                    // UPDATE ROLES
+                    'title'=>'required|min:2',
+                    'body'=>'required|min:3',
+                    'category'=>'required|numeric',
                 ];
             }
             case 'GET':
@@ -35,7 +37,8 @@ class TopicRequest extends Request
     public function messages()
     {
         return [
-            // Validation messages
+            'title.min'=>'标题内容至少3个字',// Validation messages''
+            'body.min'=>'文章内容至少三个字',
         ];
     }
 }
