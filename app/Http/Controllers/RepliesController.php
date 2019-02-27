@@ -20,7 +20,6 @@ class RepliesController extends Controller
         $reply->user_id = Auth::id();
         $reply->topic_id = $request->topic_id;
         $reply->save();
-
         return redirect()->back()->with('success', '评论创建成功！');
     }
 
