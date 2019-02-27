@@ -7,20 +7,23 @@ use Illuminate\Auth\MustVerifyEmail as MustVerifyEmailTrait;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Contracts\Auth\MustVerifyEmail as MustVerifyEmailContract;
 use Auth;
+use Spatie\Permission\Traits\HasRoles;
+
 class User extends Authenticatable implements MustVerifyEmailContract
 {
+    use HasRoles;
     use MustVerifyEmailTrait;
-    use Notifiable{
-        notify as protected laravelNotify;
+    use Notifiable {
+    notify as protected laravelNotify;
     }
 
     public function notify($instance)
     {
-        if($this->id==Auth::id()){
+        if ($this->id == Auth::id()) {
             return;
         }
 
-        if(method_exists($instance,'toDatabase')){
+        if (method_exists($instance, 'toDatabase')) {
             $this->increment('notification_count');
         }
         $this->laravelNotify($instance);
@@ -31,7 +34,7 @@ class User extends Authenticatable implements MustVerifyEmailContract
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password','introduction','avatar',
+        'name', 'email', 'password', 'introduction', 'avatar',
     ];
 
     /**
@@ -42,7 +45,8 @@ class User extends Authenticatable implements MustVerifyEmailContract
     protected $hidden = [
         'password', 'remember_token',
     ];
-    public function topics(){
+    public function topics()
+    {
         return $this->hasMany(Topic::class);
     }
     public function replies()
@@ -51,8 +55,12 @@ class User extends Authenticatable implements MustVerifyEmailContract
     }
     public function markAsRead()
     {
-        $this->notification_count=0;
+        $this->notification_count = 0;
         $this->save();
         $this->unreadNotifications->markAsRead();
+    }
+    public function isAuthorOf($model)
+    {
+        return $this->id == $model->user_id;
     }
 }

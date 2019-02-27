@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Reply;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ReplyRequest;
 use Auth;
@@ -30,6 +29,6 @@ class RepliesController extends Controller
         $this->authorize('destroy', $reply);
         $reply->delete();
 
-        return redirect()->route('replies.index')->with('success', '评论删除成功！');
+        return back()->with('success', '评论删除成功！');
     }
 }
