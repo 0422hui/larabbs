@@ -39,5 +39,9 @@ return [
             'tolerance' => env('STRIPE_WEBHOOK_TOLERANCE', 300),
         ],
     ],
+    'baidu_translate'=>[
+        'appid'=>env('20190226000271378'),
+        'key'=>env('ANGG7RC2KVVmnCzCiW2a'),
+    ]
 
 ];
