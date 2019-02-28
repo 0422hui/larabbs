@@ -8,9 +8,9 @@
 
   <!-- CSRF Token -->
   <meta name="csrf-token" content="{{ csrf_token() }}">
-  <meta name="description" content="@yield('description', 'LaraBBS 王小辉')" />
-  <title>@yield('title', 'LaraBBS') - 三尺青锋</title>
-
+  <meta name="description" content="@yield('description',setting('seo_description'), '三尺青锋 王小辉')" />
+  <title>@yield('title', 'LaraBBS') - {{setting('site_name','三尺青锋')}}</title>
+  <meta name="keyword" content="@yield('keyword', setting('seo_keyword', '三尺青锋,社区,论坛,开发者论坛'))" />
   <!-- Styles -->
   <link href="{{ mix('css/app.css') }}" rel="stylesheet">
   @yield('styles')
